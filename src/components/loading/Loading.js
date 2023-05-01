@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './Loading.css';
 
-function Loading() {
+function Loading({onLoadingSequenceComplete}) {
     const [state, setState] = useState({
         loaderVisibility: 'block',
         staticVisibility: 'none',
@@ -11,6 +11,7 @@ function Loading() {
 
     useEffect(() => {
         if (state.count > 17) {
+            onLoadingSequenceComplete();
             return;
         }
 
@@ -59,7 +60,7 @@ function Loading() {
         return () => {
             clearTimeout(timer);
         }
-    }, [state]);
+    }, [state, onLoadingSequenceComplete]);
 
 
     return (
